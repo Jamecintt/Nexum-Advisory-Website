@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nexum Advisory | Fraud Detection & Data Intelligence</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#020617;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    ::-webkit-scrollbar{
+      width:10px;
+    }
+
+    ::-webkit-scrollbar-track{
+      background:#020617;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#38bdf8;
+      border-radius:20px;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      width:100%;
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:1000;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 10%;
+      backdrop-filter:blur(12px);
+      background:rgba(2,6,23,.55);
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    .logo{
+      font-size:1.5rem;
+      font-weight:800;
+      color:#38bdf8;
+      letter-spacing:1px;
+    }
+
+    nav ul{
+      display:flex;
+      list-style:none;
+      gap:30px;
+    }
+
+    nav ul li a{
+      color:white;
+      text-decoration:none;
+      transition:.3s;
+      font-weight:500;
+    }
+
+    nav ul li a:hover{
+      color:#38bdf8;
+    }
+
+    /* HERO */
+
+    header{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:40px;
+      position:relative;
+      overflow:hidden;
+
+      background:
+      linear-gradient(rgba(2,6,23,.85), rgba(2,6,23,.95)),
+      url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop');
+
+      background-size:cover;
+      background-position:center;
+    }
+
+    .glow{
+      position:absolute;
+      width:600px;
+      height:600px;
+      background:#0ea5e9;
+      border-radius:50%;
+      filter:blur(140px);
+      opacity:.15;
+      animation:float 6s infinite ease-in-out;
+    }
+
+    .glow:nth-child(1){
+      top:-200px;
+      left:-150px;
+    }
+
+    .glow:nth-child(2){
+      bottom:-200px;
+      right:-150px;
+      animation-delay:2s;
+    }
+
+    @keyframes float{
+      0%{transform:translateY(0px);}
+      50%{transform:translateY(30px);}
+      100%{transform:translateY(0px);}
+    }
+
+    .hero{
+      max-width:950px;
+      position:relative;
+      z-index:2;
+      animation:fadeUp 1s ease;
+    }
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .hero h1{
+      font-size:5rem;
+      font-weight:800;
+      line-height:1.1;
+      margin-bottom:25px;
+    }
+
+    .hero h1 span{
+      color:#38bdf8;
+    }
+
+    .hero p{
+      font-size:1.25rem;
+      line-height:1.9;
+      color:#cbd5e1;
+      margin-bottom:40px;
+    }
+
+    .buttons{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:16px 35px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:700;
+      transition:.3s;
+      display:inline-block;
+    }
+
+    .primary{
+      background:#38bdf8;
+      color:#020617;
+    }
+
+    .primary:hover{
+      transform:translateY(-5px);
+      box-shadow:0 10px 30px rgba(56,189,248,.4);
+    }
+
+    .secondary{
+      border:1px solid rgba(255,255,255,.15);
+      color:white;
+      background:rgba(255,255,255,.05);
+      backdrop-filter:blur(10px);
+    }
+
+    .secondary:hover{
+      background:#38bdf8;
+      color:#020617;
+    }
+
+    /* STATS */
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:20px;
+      margin-top:-70px;
+      padding:0 10%;
+      position:relative;
+      z-index:5;
+    }
+
+    .stat-card{
+      background:rgba(15,23,42,.9);
+      border:1px solid rgba(255,255,255,.05);
+      padding:35px;
+      border-radius:20px;
+      text-align:center;
+      backdrop-filter:blur(10px);
+      transition:.3s;
+    }
+
+    .stat-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .stat-card h2{
+      color:#38bdf8;
+      font-size:2.2rem;
+    }
+
+    .stat-card p{
+      color:#94a3b8;
+      margin-top:10px;
+    }
+
+    /* SECTIONS */
+
+    section{
+      padding:110px 10%;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:3rem;
+      margin-bottom:70px;
+      font-weight:800;
+    }
+
+    .section-title span{
+      color:#38bdf8;
+    }
+
+    /* SERVICES */
+
+    .services{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+      gap:25px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,#0f172a,#111c35);
+      border-radius:24px;
+      padding:35px;
+      border:1px solid rgba(255,255,255,.06);
+      transition:.4s;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:'';
+      position:absolute;
+      width:150px;
+      height:150px;
+      background:#38bdf8;
+      filter:blur(80px);
+      opacity:.08;
+      top:-40px;
+      right:-40px;
+    }
+
+    .card:hover{
+      transform:translateY(-12px);
+      border-color:#38bdf8;
+      box-shadow:0 10px 35px rgba(56,189,248,.15);
+    }
+
+    .card h3{
+      margin-bottom:15px;
+      font-size:1.3rem;
+      color:#38bdf8;
+    }
+
+    .card p{
+      line-height:1.8;
+      color:#cbd5e1;
+    }
+
+    /* ABOUT */
+
+    .about{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:60px;
+      align-items:center;
+    }
+
+    .about img{
+      width:100%;
+      border-radius:25px;
+      box-shadow:0 10px 40px rgba(0,0,0,.4);
+    }
+
+    .about-text h2{
+      font-size:3rem;
+      margin-bottom:25px;
+    }
+
+    .about-text h2 span{
+      color:#38bdf8;
+    }
+
+    .about-text p{
+      color:#cbd5e1;
+      line-height:2;
+      margin-bottom:20px;
+    }
+
+    /* CONTACT */
+
+    .contact{
+      text-align:center;
+      background:linear-gradient(180deg,#0f172a,#020617);
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+
+    .contact p{
+      color:#cbd5e1;
+      max-width:700px;
+      margin:auto;
+      line-height:1.9;
+      margin-bottom:40px;
+    }
+
+    .socials{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:50px;
+    }
+
+    .socials a{
+      padding:15px 30px;
+      border-radius:14px;
+      text-decoration:none;
+      color:white;
+      border:1px solid rgba(255,255,255,.08);
+      transition:.3s;
+      background:rgba(255,255,255,.03);
+    }
+
+    .socials a:hover{
+      background:#38bdf8;
+      color:#020617;
+    }
+
+    form{
+      max-width:700px;
+      margin:50px auto 0;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+    form input,
+    form select,
+    form textarea{
+      padding:18px;
+      border:none;
+      border-radius:14px;
+      background:#0f172a;
+      color:white;
+      font-size:1rem;
+      outline:none;
+    }
+
+    form textarea{
+      resize:none;
+    }
+
+    footer{
+      padding:35px;
+      text-align:center;
+      color:#64748b;
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+
+    /* MOBILE */
+
+    @media(max-width:900px){
+
+      nav ul{
+        display:none;
+      }
+
+      .hero h1{
+        font-size:3rem;
+      }
+
+      .hero p{
+        font-size:1rem;
+      }
+
+      .section-title{
+        font-size:2.2rem;
+      }
+
+      .about-text h2{
+        font-size:2.2rem;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <div class="logo">
+      NEXUM ADVISORY
+    </div>
+
+    <ul>
+      <li><a href="#services">Servicios</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#about">Nosotros</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+
+  </nav>
+
+  <!-- HERO -->
+
+  <header>
+
+    <div class="glow"></div>
+    <div class="glow"></div>
+
+    <div class="hero">
+
+      <h1>
+        Fraud Detection & <span>Data Intelligence</span>
+      </h1>
+
+      <p>
+        Detectamos anomalías, patrones sospechosos
+        y riesgos ocultos mediante análisis de datos,
+        automatización y sistemas inteligentes de detección.
+      </p>
+
+      <div class="buttons">
+
+        <a href="#portfolio" class="btn primary">
+          Ver Portfolio
+        </a>
+
+        <a href="#services" class="btn secondary">
+          Servicios
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- STATS -->
+
+  <div class="stats">
+
+    <div class="stat-card">
+      <h2>Fraud</h2>
+      <p>Detection Systems</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>Analytics</h2>
+      <p>Data Intelligence</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>Anomalies</h2>
+      <p>Pattern Detection</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>Automation</h2>
+      <p>Smart Reporting</p>
+    </div>
+
+  </div>
+
+  <!-- SERVICES -->
+
+  <section id="services">
+
+    <h2 class="section-title">
+      Nuestros <span>Servicios</span>
+    </h2>
+
+    <div class="services">
+
+      <div class="card">
+        <h3>Fraud Detection</h3>
+
+        <p>
+          Identificación de irregularidades,
+          anomalías y patrones sospechosos
+          en procesos empresariales.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Data Analytics</h3>
+
+        <p>
+          Análisis avanzado de datos
+          para descubrir oportunidades,
+          riesgos y patrones ocultos.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Dashboards</h3>
+
+        <p>
+          Visualización interactiva
+          de datos mediante dashboards
+          modernos y estratégicos.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Automation</h3>
+
+        <p>
+          Automatización de reportes,
+          limpieza de datos y tareas repetitivas.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Anomaly Detection</h3>
+
+        <p>
+          Sistemas de detección
+          de comportamientos inusuales
+          y eventos atípicos.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Business Intelligence</h3>
+
+        <p>
+          Decisiones estratégicas
+          basadas en datos reales
+          y análisis inteligente.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PORTFOLIO -->
+
+  <section id="portfolio">
+
+    <h2 class="section-title">
+      Casos & <span>Portfolio</span>
+    </h2>
+
+    <div class="services">
+
+      <div class="card">
+
+        <h3>Fraud Analytics</h3>
+
+        <p>
+          Investigación de anomalías,
+          patrones sospechosos
+          y análisis de fraude.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <h3>Data Visualization</h3>
+
+        <p>
+          Dashboards interactivos,
+          reportes visuales y análisis empresarial.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <h3>Automation Systems</h3>
+
+        <p>
+          Optimización operativa
+          mediante automatización y análisis inteligente.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top:50px;">
+
+      <a
+        href="https://github.com/TUUSUARIO"
+        target="_blank"
+        class="btn primary"
+      >
+
+        Ver GitHub Portfolio
+
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+
+    <div class="about">
+
+      <div class="about-text">
+
+        <h2>
+          Sobre <span>Nexum Advisory</span>
+        </h2>
+
+        <p>
+          Nexum Advisory está enfocado
+          en análisis de datos,
+          detección de anomalías
+          y sistemas inteligentes de investigación empresarial.
+        </p>
+
+        <p>
+          Nuestro enfoque combina
+          pensamiento analítico,
+          automatización y visualización de datos
+          para resolver problemas reales.
+        </p>
+
+        <p>
+          Porque muchas veces el fraude
+          no se ve hasta que alguien sabe dónde mirar 💀
+        </p>
+
+      </div>
+
+      <div>
+
+        <img
+          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
+          alt="analytics"
+        >
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section class="contact" id="contact">
+
+    <h2 class="section-title">
+      Contacta a <span>Nexum</span>
+    </h2>
+
+    <p>
+      ¿Deseas detectar anomalías,
+      automatizar procesos
+      o analizar datos empresariales?
+      Hablemos.
+    </p>
+
+    <div class="socials">
+
+      <a href="https://linkedin.com/" target="_blank">
+        LinkedIn
+      </a>
+
+      <a href="https://github.com/TUUSUARIO" target="_blank">
+        GitHub
+      </a>
+
+    </div>
+
+    <form
+      action="https://formsubmit.co/TUCORREO@gmail.com"
+      method="POST"
+    >
+
+      <input
+        type="text"
+        name="name"
+        placeholder="Nombre"
+        required
+      >
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Correo Electrónico"
+        required
+      >
+
+      <select
+        name="service"
+        required
+      >
+
+        <option value="">
+          Tipo de Servicio
+        </option>
+
+        <option>
+          Fraud Detection
+        </option>
+
+        <option>
+          Data Analytics
+        </option>
+
+        <option>
+          Dashboards
+        </option>
+
+        <option>
+          Automation
+        </option>
+
+        <option>
+          Business Intelligence
+        </option>
+
+      </select>
+
+      <textarea
+        name="message"
+        rows="6"
+        placeholder="Describe tu proyecto..."
+        required
+      ></textarea>
+
+      <button
+        type="submit"
+        class="btn primary"
+        style="border:none; cursor:pointer;"
+      >
+
+        Contactar
+
+      </button>
+
+    </form>
+
+  </section>
+
+  <footer>
+    © 2026 NEXUM ADVISORY | Fraud Detection • Data Analytics • Business Intelligence
+  </footer>
+
+</body>
+
+</html>
